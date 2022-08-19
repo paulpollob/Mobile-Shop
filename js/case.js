@@ -5,10 +5,15 @@ console.log("happy jonmastomi");
 function update(isIncrease, inputField, priceElement, perUnitPrice)
 {
     const input = getValueFrmFld(inputField);
+    let totalPrice = 0;
+    const Subtotal = document.getElementById("subtotal");
+    const Tax = document.getElementById('tax')
+    const Total = document.getElementById('total');
     if(isIncrease)
     {
         setValueToFld(inputField, input+1);
-        setValueToElmnt(priceElement, perUnitPrice*(input+1));
+        totalPrice = perUnitPrice*(input+1);
+        setValueToElmnt(priceElement, totalPrice);
     }
     else
     {
@@ -16,9 +21,15 @@ function update(isIncrease, inputField, priceElement, perUnitPrice)
         {
             console.log("hare Krishna");
             setValueToFld(inputField, input-1);
-            setValueToElmnt(priceElement, perUnitPrice*(input-1));
+            totalPrice = perUnitPrice*(input-1);
+            setValueToElmnt(priceElement, totalPrice);
         }
     }
+    Subtotal.innerText = getValueFrmElmnt('mobile-price')+getValueFrmElmnt('mobile-case-price');
+    Tax.innerText = parseFloat((parseInt(Subtotal.innerText)*0.1).toFixed(2));
+    Total.innerText = parseFloat(Subtotal.innerText)+parseFloat(Tax.innerText);
+    
+
 }
 
 // for mobile start
